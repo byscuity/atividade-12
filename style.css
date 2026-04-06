@@ -8,140 +8,155 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Estilização do Menu */
-.menu {
-    background-color: #333;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.container {
+    width: 100%;
+    padding: 20px;
 }
 
-.menu ul {
-    list-style: none;
+/* Menu centralizado */
+.menu-central {
     display: flex;
     justify-content: center;
-    padding: 0;
-    margin: 0;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.menu li {
-    margin: 0;
-    position: relative;
+.menu-central ul {
+    list-style: none;
+    text-align: center;
 }
 
-.menu a {
-    display: block;
-    padding: 20px 30px;
-    color: white;
+.menu-central li {
+    margin: 40px 0;
+}
+
+.menu-central a {
+    display: inline-block;
     text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    color: white;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 15px 30px;
+    transition: all 0.4s ease;
     position: relative;
-    overflow: hidden;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff, #fff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: white;
 }
 
-/* Efeito Hover - Sublinhado Animado */
-.menu a::before {
+/* Efeito Hover - Aumentar tamanho */
+.menu-central a:hover {
+    transform: scale(1.2);
+    color: #ffd700;
+    text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.5),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Efeito de sublinhado animado */
+.menu-central a::before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
     width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-    transition: width 0.3s ease;
+    height: 4px;
+    background: linear-gradient(90deg, #ffd700, #ff6b6b);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
 }
 
-.menu a:hover::before {
-    width: 100%;
+.menu-central a:hover::before {
+    width: 80%;
 }
 
-/* Efeito Hover - Mudança de Cor */
-.menu a:hover {
-    color: #ff6b6b;
-    transform: translateY(-2px);
-}
-
-/* Efeito de fundo ao passar o mouse */
-.menu li:hover {
-    background-color: rgba(255,255,255,0.1);
-}
-
-/* Animação de pulsação suave */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.05);
-    }
-}
-
-.menu a:active {
-    animation: pulse 0.1s ease;
-}
-
-/* Efeito de brilho ao passar o mouse */
-.menu a::after {
+/* Efeito de brilho */
+.menu-central a::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,215,0,0.3), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    pointer-events: none;
 }
 
-.menu a:hover::after {
-    left: 100%;
+.menu-central a:hover::after {
+    width: 200px;
+    height: 200px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .menu ul {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .menu a {
-        padding: 15px 20px;
-    }
-    
-    .menu a:hover {
-        transform: translateX(10px);
-    }
-}
-
-/* Estilização do conteúdo */
-.content {
-    text-align: center;
-    padding: 50px 20px;
-    color: white;
-}
-
-.content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    animation: fadeInUp 0.8s ease;
-}
-
-.content p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-@keyframes fadeInUp {
+/* Efeito de rotação suave */
+@keyframes rotate {
     from {
-        opacity: 0;
-        transform: translateY(30px);
+        transform: rotate(0deg);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: rotate(360deg);
     }
+}
+
+.menu-central a:active {
+    animation: rotate 0.5s ease;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .menu-central a {
+        font-size: 2rem;
+    }
+    
+    .menu-central li {
+        margin: 25px 0;
+    }
+    
+    .menu-central a:hover {
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-central a {
+        font-size: 1.5rem;
+    }
+    
+    .menu-central li {
+        margin: 20px 0;
+    }
+}
+
+/* Efeito de pulsação suave nos itens */
+@keyframes pulseGlow {
+    0%, 100% {
+        text-shadow: 0 0 0px rgba(255, 215, 0, 0);
+    }
+    50% {
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    }
+}
+
+.menu-central a {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.menu-central a:hover {
+    animation: none;
+}
+.menu-central a:hover {
+    transform: translateX(20px);
+    color: #ffd700;
+    letter-spacing: 5px;
 }
