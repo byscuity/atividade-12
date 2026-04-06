@@ -1,1 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container do menu */
+.menu-container {
+    background: #000000;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid #222;
+}
+
+/* Lista do menu - empilhada de baixo pra cima */
+.menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+}
+
+/* Itens do menu */
+.menu li {
+    position: relative;
+}
+
+/* Links do menu */
+.menu a {
+    display: block;
+    padding: 14px 28px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Barra azul que desliza por trás */
+.menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #007bff;
+    transition: left 0.3s ease;
+    z-index: -1;
+    border-radius: 8px;
+}
+
+/* Efeito hover - barra desliza da esquerda pra direita */
+.menu a:hover::before {
+    left: 0;
+}
+
+/* Efeito hover - mantém letras brancas com deslocamento */
+.menu a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+/* Barra lateral azul */
+.menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background: #007bff;
+    border-radius: 2px;
+    transition: height 0.3s ease;
+}
+
+/* Ao passar o mouse, a barra lateral cresce */
+.menu a:hover::after {
+    height: 70%;
+}
+
+/* Efeito de clique */
+.menu a:active {
+    transform: scale(0.98);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .menu a {
+        padding: 12px 24px;
+        font-size: 16px;
+        min-width: 200px;
+    }
+}
